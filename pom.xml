@@ -11,7 +11,7 @@
 
     <groupId>dev.mttw</groupId>
     <artifactId>student-application</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <name>student-application</name>
 
