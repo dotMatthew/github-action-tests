@@ -81,7 +81,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Publish package to github registry
-        run: mvn -B deploy
+        run: mvn -B deploy -DskipTests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
