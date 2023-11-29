@@ -7,6 +7,9 @@ plugins:
   - - "@semantic-release/git"
     - assets:
         - pom.xml
+        - module-1/pom.xml
+        - module-2/pom.xml
+        - core/pom.xml
       message: "chore(release): bump ${nextRelease.version}"
 
 branches:
