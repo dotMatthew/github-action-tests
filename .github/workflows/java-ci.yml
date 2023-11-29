@@ -21,6 +21,21 @@ jobs:
     needs:
       - build
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: admin
+          POSTGRES_PASSWORD: admin
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -30,6 +45,12 @@ jobs:
           distribution: 'temurin'
       - name: Run tests
         run: mvn -B test
+        env:
+          PSQL_USER: admin
+          PSQL_PASS: admin
+          PSQL_DB: postgres
+          PSQL_PORT: 5432
+          PSQL_HOST: localhost
 
   bump-version:
     if: github.ref == 'refs/heads/main'

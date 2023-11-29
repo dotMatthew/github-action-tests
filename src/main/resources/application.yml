@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    username: ${PSQL_USER}
+    password: ${PSQL_PASS}
+    url: jdbc:postgresql://${PSQL_HOST}:${PSQL_PORT}/${PSQL_DB}
+  jpa:
+    hibernate:
+      ddl-auto: create
+  application:
+    name: data-maintenance
