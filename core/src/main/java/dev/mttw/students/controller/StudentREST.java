@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/api/v1/students")
 public class StudentREST {
 
-    @GetMapping
+    @GetMapping("/hello")
     @ResponseStatus(HttpStatus.OK)
     public String sayHelloWorld() {
         return "Hello World :)";
