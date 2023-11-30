@@ -6,7 +6,7 @@
     <parent>
         <groupId>dev.mttw</groupId>
         <artifactId>student-application</artifactId>
-        <version>2.2.0</version>
+        <version>3.0.0</version>
     </parent>
 
     <artifactId>module-1</artifactId>
