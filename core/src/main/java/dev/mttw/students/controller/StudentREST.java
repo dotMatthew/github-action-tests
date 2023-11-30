@@ -16,7 +16,7 @@ public class StudentREST {
         return "Hello World :)";
     }
 
-    @GetMapping("/example")
+    @GetMapping("/example/test")
     public String exampleRestEndpoint() {
         return "Example!";
     }
