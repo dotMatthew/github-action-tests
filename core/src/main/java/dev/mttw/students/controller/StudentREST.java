@@ -15,4 +15,9 @@ public class StudentREST {
     public String sayHelloWorld() {
         return "Hello World :)";
     }
+
+    @GetMapping("/example")
+    public String exampleRestEndpoint() {
+        return "Example!";
+    }
 }
