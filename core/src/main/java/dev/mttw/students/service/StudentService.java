@@ -1,5 +1,7 @@
 package dev.mttw.students.service;
 
+import dev.mttw.students.dto.CreateStudentDTO;
+import dev.mttw.students.entity.Student;
 import dev.mttw.students.repository.StudentRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +23,18 @@ public class StudentService {
         int nTwoInt = Integer.parseInt(numberTwo);
 
         return nOneInt + nTwoInt;
+    }
+
+    public long createStudent(CreateStudentDTO dto) {
+        Student student = this.mapToStudent(dto);
+        this.getStudentRepository().save(student);
+        return 1;
+    }
+
+    private Student mapToStudent(CreateStudentDTO dto) {
+        return Student.builder()
+            .username(dto.getUsername())
+            .birthDate(dto.getBirthDate())
+            .build();
     }
 }

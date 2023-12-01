@@ -11,6 +11,6 @@ FROM eclipse-temurin:17-alpine
 
 WORKDIR /app
 
-COPY --from=builder /usr/app/src/core/target/student-application-0.0.1-SNAPSHOT.jar /app/service.jar
+COPY --from=builder /usr/app/src/core/target/core.jar /app/service.jar
 
 CMD java -jar /app/service.jar
