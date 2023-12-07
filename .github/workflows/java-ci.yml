@@ -1,6 +1,11 @@
 name: Java CI
 on: [ push, pull_request ]
 
+permissions:
+  contents: write
+  packages: write
+  issues: write
+
 env:
   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -97,15 +102,15 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password:
       - name: build image with latest tag
         run: |
-          docker build -t github-action-tests:latest .
+          docker build -t ghcr.io/dotmatthew/github-action-tests:latest .
       - name: build image with version tag
         if: contains(github.ref, 'refs/tags')
         run: |
-          docker tag ${{ steps.setup.outputs.IMAGE_NAME }}:latest \
-          github-action-tests:$(git describe --tags --always) \
+          docker tag ghcr.io/dotmatthew/github-action-tests:latest \
+          ghcr.io/dotmatthew/github-action-tests:$(git describe --tags --always) \
           .
       - name: push to docker registry
         run: |
