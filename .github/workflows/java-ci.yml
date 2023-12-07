@@ -114,7 +114,7 @@ jobs:
         run: |
           docker build -t ghcr.io/dotmatthew/github-action-tests:latest .
       - name: build image with version tag
-        if: ${{ NEXT_VERSION != '' }}
+        if: ${{ env.NEXT_VERSION != '' }}
         run: |
           docker tag ghcr.io/dotmatthew/github-action-tests:latest \
           ghcr.io/dotmatthew/github-action-tests:$NEXT_VERSION \
