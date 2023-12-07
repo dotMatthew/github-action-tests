@@ -117,8 +117,7 @@ jobs:
         if: ${{ env.NEXT_VERSION != '' }}
         run: |
           docker tag ghcr.io/dotmatthew/github-action-tests:latest \
-          ghcr.io/dotmatthew/github-action-tests:$NEXT_VERSION \
-          .
+          ghcr.io/dotmatthew/github-action-tests:$NEXT_VERSION
       - name: push to docker registry
         run: |
           docker push --all-tags ghcr.io/dotmatthew/github-action-tests
