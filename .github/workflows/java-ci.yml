@@ -114,4 +114,4 @@ jobs:
           .
       - name: push to docker registry
         run: |
-          docker push --all-tags github-action-tests
+          docker push --all-tags ghcr.io/dotmatthew/github-action-tests
