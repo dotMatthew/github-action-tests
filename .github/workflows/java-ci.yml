@@ -102,7 +102,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password:
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: build image with latest tag
         run: |
           docker build -t ghcr.io/dotmatthew/github-action-tests:latest .
