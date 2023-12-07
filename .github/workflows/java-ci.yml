@@ -98,13 +98,11 @@ jobs:
   docker-deploy:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    env:
+      NEXT_VERSION: ${{ needs.bump-version.outputs.versionTag }}
     needs:
       - bump-version
     steps:
-      - name: Check output
-        run: echo "The next version is $OUTPUT"
-        env:
-          OUTPUT: ${{ needs.bump-version.outputs.versionTag }}
       - uses: actions/checkout@v3
       - name: Authenticate against ghcr
         uses: docker/login-action@v2
@@ -116,10 +114,10 @@ jobs:
         run: |
           docker build -t ghcr.io/dotmatthew/github-action-tests:latest .
       - name: build image with version tag
-        if: contains(github.ref, 'refs/tags')
+        if: ${{ NEXT_VERSION != '' }}
         run: |
           docker tag ghcr.io/dotmatthew/github-action-tests:latest \
-          ghcr.io/dotmatthew/github-action-tests:$(git describe --tags --always) \
+          ghcr.io/dotmatthew/github-action-tests:$NEXT_VERSION \
           .
       - name: push to docker registry
         run: |
