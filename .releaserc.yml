@@ -1,4 +1,4 @@
-#extends: "./node_modules/semantic-release-monorepo-esm/dist/index.js"
+extends: semantic-release-monorepo-esm
 plugins:
   - "@semantic-release/commit-analyzer"
   - "@semantic-release/release-notes-generator"
