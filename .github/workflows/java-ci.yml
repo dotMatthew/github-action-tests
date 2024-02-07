@@ -69,11 +69,11 @@ jobs:
       - name: Install node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 21
       - name: Install plugins
         run: npm install @semantic-release/git @semantic-release/gitlab @semantic-release/exec semantic-release-monorepo
       - name: Bump version if necessary
-        run: npx semantic-release
+        run: npm run semantic-release -e semantic-release-monorepo
       - name: Pass version tag
         id: version_tag
         run: cat build.env >> "$GITHUB_OUTPUT"
