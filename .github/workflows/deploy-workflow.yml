@@ -1,0 +1,10 @@
+on:
+  workflow_call:
+
+jobs:
+  test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print github ref
+        run: |
+          echo ${{ github.ref }}
