@@ -71,12 +71,12 @@ jobs:
         with:
           node-version: 21
       - name: Install plugins
-        run: npm install @semantic-release/git @semantic-release/gitlab @semantic-release/exec semantic-release-monorepo
+        run: npm install @semantic-release/git @semantic-release/gitlab @semantic-release/exec
       - name: Bump version if necessary
         run: npx semantic-release
       - name: Pass version tag
         id: version_tag
-        run: cat build.env >> "$GITHUB_OUTPUT"
+        run: touch build.env && cat build.env >> "$GITHUB_OUTPUT"
 
   deploy:
     if: github.ref == 'refs/heads/main'
