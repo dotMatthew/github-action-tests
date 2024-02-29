@@ -76,9 +76,9 @@ jobs:
         run: npx semantic-release
       - name: Pass version tag
         id: version_tag
-        run: cat build.env >> "$GITHUB_OUTPUT"
+        run: touch build.env && cat build.env >> "$GITHUB_OUTPUT"
 
-  deploy:
+  maven-deploy:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs:
