@@ -14,6 +14,5 @@ plugins:
 
 branches:
   - "main"
-  - "+([0-9])?(.{+([0-9]),x}).x"
-  - {name: "release/*", prerelease: "rc" , channel: "next"}
-  - {name: "feature/*", prerelease: "feat", channel: "hotfix"}
+  - name: feature/*
+    prerelease: '${name.replace(/^feature\//g, "feat-")}'
