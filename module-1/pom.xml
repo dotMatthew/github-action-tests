@@ -6,7 +6,7 @@
     <parent>
         <groupId>dev.mttw</groupId>
         <artifactId>student-application</artifactId>
-        <version>4.1.0-feat-ci-changes-test-feature.2</version>
+        <version>4.1.0</version>
     </parent>
 
     <artifactId>module-1</artifactId>
