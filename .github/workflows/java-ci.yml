@@ -73,7 +73,7 @@ jobs:
         with:
           node-version: 21
       - name: Install plugins
-        run: npm install @semantic-release/git @semantic-release/gitlab @semantic-release/exec semantic-release-monorepo
+        run: npm install @semantic-release/git @semantic-release/github @semantic-release/exec semantic-release-monorepo
       - name: Bump version if necessary
         run: npx semantic-release
       - name: Pass version tag
