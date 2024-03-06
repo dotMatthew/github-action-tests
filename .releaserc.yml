@@ -16,3 +16,7 @@ branches:
   - "main"
   - name: feature/*
     prerelease: '${name.replace(/^feature\//g, "feat-")}'
+  - name: release/*
+    prerelease: 'rc'
+  - name: hotfix/*
+    prerelease: 'hotfix'
