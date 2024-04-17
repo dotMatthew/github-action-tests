@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: github-action-test-service
+  namespace: github-action-test
+spec:
+  selector:
+    app: github-action-tests
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: github-action-test-deployment
+  namespace: github-action-tests
+spec:
+  selector:
+    matchLabels:
+      app: github-action-tests
+  template:
+    metadata:
+      labels:
+        app: github-action-tests
+    spec:
+      containers:
+        - name: github-action-tests-ct
+          image: ghcr.io/dotmatthew/github-action-tests:4.1.0
+          ports:
+            - containerPort: 8080
