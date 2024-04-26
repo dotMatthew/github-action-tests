@@ -13,6 +13,9 @@ plugins:
       message: "chore(release): bump ${nextRelease.version}"
 
 branches:
-  - "main"
+  - name: "main"
+    prerelease: false
   - name: feature/*
     prerelease: '${name.replace(/^feature\//g, "feat-")}'
+  - name: fix/*
+    prerelease: true
