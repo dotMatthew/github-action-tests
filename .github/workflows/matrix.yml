@@ -33,7 +33,7 @@ jobs:
       - setup
     strategy:
       matrix:
-        web-ips: ${{ fromJSON(needs.setup.outputs.web-server-addresses) }}
+        web-ips: ${{ needs.setup.outputs.web-server-addresses }}
 
     steps:
       - name: Print ips
@@ -46,7 +46,7 @@ jobs:
       - setup
     strategy:
       matrix:
-        app-ips: ${{ fromJSON(needs.setup.outputs.app-server-addresses) }}
+        app-ips: ${{ needs.setup.outputs.app-server-addresses }}
 
     steps:
       - name: Print ips
