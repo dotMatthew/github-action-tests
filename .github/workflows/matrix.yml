@@ -15,17 +15,17 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      web-server-addresses: ${{ steps.web-server-addresses.ips }}
-      app-server-addresses: ${{ steps.app-server-addresses.ips }}
+      web-ips: ${{ steps.web-server-addresses.web-ips }}
+      app-ips: ${{ steps.app-server-addresses.app-ips }}
     steps:
       - name: Set web server addresses
         id: web-server-addresses
         run: |
-          echo 'ips=[${{ vars.WEB_SERVER_ADDRESSES }}]' >> "$GITHUB_OUTPUT"
+          echo 'web-ips=[${{ vars.WEB_SERVER_ADDRESSES }}]' >> "$GITHUB_OUTPUT"
       - name: Set application server addresses
         id: app-server-addresses
         run: |
-          echo 'ips=[${{ vars.APP_SERVER_ADDRESSES }}]' >> "$GITHUB_OUTPUT"
+          echo 'app-ips=[${{ vars.APP_SERVER_ADDRESSES }}]' >> "$GITHUB_OUTPUT"
 
   matrix-job-web-server:
     runs-on: ubuntu-latest
@@ -33,7 +33,7 @@ jobs:
       - setup
     strategy:
       matrix:
-        web-ips: ${{ needs.setup.outputs.web-server-addresses }}
+        web-ips: ${{ needs.setup.outputs.web-ips }}
 
     steps:
       - name: Print ips
@@ -46,7 +46,7 @@ jobs:
       - setup
     strategy:
       matrix:
-        app-ips: ${{ needs.setup.outputs.app-server-addresses }}
+        app-ips: ${{ needs.setup.outputs.app-ips }}
 
     steps:
       - name: Print ips
