@@ -1,0 +1,54 @@
+name: Matrix-strategy
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        description: "In which environment should be deployed"
+        required: true
+        type: choice
+        default: 'INT'
+        options:
+          - INT
+          - PROD
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      web-server-addresses: ${{ steps.web-server-addresses.ips }}
+      app-server-addresses: ${{ steps.app-server-addresses.ips }}
+    steps:
+      - name: Set web server addresses
+        id: web-server-addresses
+        run: |
+          echo 'ips=[${{ vars.WEB_SERVER_ADDRESSES }}]' >> "$GITHUB_OUTPUT"
+      - name: Set application server addresses
+        id: app-server-addresses
+        run: |
+          echo 'ips=[${{ vars.APP_SERVER_ADDRESSES }}]' >> "$GITHUB_OUTPUT"
+
+  matrix-job-web-server:
+    runs-on: ubuntu-latest
+    needs:
+      - setup
+    strategy:
+      matrix:
+        web-ips: ${{ fromJSON(needs.setup.outputs.web-server-addresses) }}
+
+    steps:
+      - name: Print ips
+        run: |
+          echo ${{ matrix.web-ips }}
+
+  matrix-job-app-server:
+    runs-on: ubuntu-latest
+    needs:
+      - setup
+    strategy:
+      matrix:
+        app-ips: ${{ fromJSON(needs.setup.outputs.app-server-addresses) }}
+
+    steps:
+      - name: Print ips
+        run: |
+          echo ${{ matrix.app-ips }}
