@@ -10,22 +10,58 @@ on:
         options:
           - INT
           - PROD
+      disabled:
+        type: boolean
+        required: true
+        default: false
 
 jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      web-ips: ${{ steps.web-server-addresses.web-ips }}
-      app-ips: ${{ steps.app-server-addresses.app-ips }}
+      web-ips: ${{ steps.web-ips.outputs.web-ips }}
+      app-ips: ${{ steps.app-ips.outputs.app-ips }}
+      disabled: ${{ steps.disable.outputs.disabled }}
     steps:
       - name: Set web server addresses
-        id: web-server-addresses
+        id: web-ips
         run: |
           echo 'web-ips=[${{ vars.WEB_SERVER_ADDRESSES }}]' >> "$GITHUB_OUTPUT"
       - name: Set application server addresses
-        id: app-server-addresses
+        id: app-ips
         run: |
           echo 'app-ips=[${{ vars.APP_SERVER_ADDRESSES }}]' >> "$GITHUB_OUTPUT"
+      - name: Disable on condition
+        id: disable
+        shell: bash
+        env:
+          SERVERS: ${{ vars.disabled }}
+        run: |
+          if [ "$SERVERS" == "disabled" ]; then
+            echo 'disabled=YES' >> "$GITHUB_OUTPUT"
+          else
+            echo 'disabled=NO' >> "$GITHUB_OUTPUT"
+          fi
+
+  output-test:
+    runs-on: ubuntu-latest
+    needs:
+      - setup
+    steps:
+      - name: Test
+        run: |
+          echo Test ${{ needs.setup.outputs.web-ips }}
+      - name: Output input
+        run: |
+          echo ${{ inputs.disabled }}
+      - name: Is this job disabled?
+        if: ${{ inputs.disabled }}
+        run: |
+          echo "This is disabled?"
+      - name: Negate the if condition
+        if: ${{ ! inputs.disabled }}
+        run: |
+          echo "This is disabled (negate)?"
 
   matrix-job-web-server:
     runs-on: ubuntu-latest
@@ -33,7 +69,7 @@ jobs:
       - setup
     strategy:
       matrix:
-        web-ips: ${{ needs.setup.outputs.web-ips }}
+        web-ips: ${{ fromJSON(needs.setup.outputs.web-ips) }}
 
     steps:
       - name: Print ips
@@ -41,12 +77,13 @@ jobs:
           echo ${{ matrix.web-ips }}
 
   matrix-job-app-server:
+    if: (needs.setup.outputs.inet-servers-disabled == 'NO')
     runs-on: ubuntu-latest
     needs:
       - setup
     strategy:
       matrix:
-        app-ips: ${{ needs.setup.outputs.app-ips }}
+        app-ips: ${{ fromJSON(needs.setup.outputs.app-ips) }}
 
     steps:
       - name: Print ips
