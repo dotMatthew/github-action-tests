@@ -1,0 +1,10 @@
+name: Commit message workflow
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    if: contains(github.event.head_commit.message, '[RELEASE]')
+    steps:
+      - name: Example
+        run: echo "Hello World!"
