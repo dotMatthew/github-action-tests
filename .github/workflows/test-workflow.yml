@@ -1,5 +1,8 @@
 name: test-workflow.yml
-on: push
+on:
+  push:
+    paths-ignore:
+      - .github/**
 
 jobs:
   reusable-workflow:
