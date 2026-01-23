@@ -1,0 +1,12 @@
+name: call-input-test.yml
+on:
+  push:
+
+jobs:
+  test:
+    uses: ./.github/workflows/input-test.yml
+    with:
+      branch: feature/test
+
+  test-2:
+    uses: ./.github/workflows/input-test.yml

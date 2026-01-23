@@ -1,0 +1,16 @@
+name: input-test.yml
+on:
+  workflow_call:
+    inputs:
+      branch:
+        type: string
+        description: "Branch to build from"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.branch || github.ref }}
