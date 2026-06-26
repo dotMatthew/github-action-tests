@@ -21,6 +21,8 @@ jobs:
           scope: '@dotmatthew'
       - name: Install plugins
         run: npm install semantic-release@25.0.2 @semantic-release/github @dotmatthew/semantic-release-config@1.0.0
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PERSONAL_GITHUB_PAT }}
       - name: Bump version if necessary
         run: npx semantic-release
         env:
