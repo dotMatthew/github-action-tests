@@ -17,7 +17,7 @@ jobs:
       - name: Install node
         uses: actions/setup-node@v4
         with:
-          node-version: 21
+          node-version: 24
       - name: Install plugins
         run: npm install @semantic-release/git @semantic-release/gitlab @semantic-release/exec semantic-release-monorepo
       - name: Bump version if necessary
