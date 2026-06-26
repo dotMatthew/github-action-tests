@@ -20,5 +20,5 @@ jobs:
       - name: Bump version if necessary
         run: npx semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_PAT }}
 
