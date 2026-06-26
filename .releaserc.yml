@@ -3,14 +3,6 @@ plugins:
   - "@semantic-release/release-notes-generator"
   - - "@semantic-release/exec"
     - verifyReleaseCmd: 'mvn versions:set -DnewVersion="${nextRelease.version}" && echo "NEXT_VERSION=${nextRelease.version}" >> build.env'
-  - "@semantic-release/github"
-  - - "@semantic-release/git"
-    - assets:
-        - pom.xml
-        - module-1/pom.xml
-        - module-2/pom.xml
-        - core/pom.xml
-      message: "chore(release): bump ${nextRelease.version}"
 
 branches:
   - "main"
