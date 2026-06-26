@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PERSONAL_GITHUB_PAT }}
       - name: Install node
         uses: actions/setup-node@v4
         with:
