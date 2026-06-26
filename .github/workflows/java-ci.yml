@@ -17,8 +17,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@dotmatthew'
       - name: Install plugins
-        run: npm install @semantic-release/git @semantic-release/gitlab @semantic-release/exec semantic-release-monorepo
+        run: npm install semantic-release@25.0.2 @semantic-release/github @dotmatthew/semantic-release-config@1.0.0
       - name: Bump version if necessary
         run: npx semantic-release
         env:

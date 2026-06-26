@@ -1,0 +1,16 @@
+{
+  "name": "@dotmatthew/semantic-release-config",
+  "version": "1.0.0",
+  "description": "Zentrale semantic-release Konfiguration",
+  "main": "index.js",
+  "files": ["index.js"],
+  "repository": "github:dotmatthew/github-action-tests",
+  "dependencies": {
+    "@semantic-release/commit-analyzer": "^13.0.0",
+    "@semantic-release/release-notes-generator": "^14.0.0",
+    "@semantic-release/github": "^11.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}
