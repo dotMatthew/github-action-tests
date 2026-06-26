@@ -1,6 +1,0 @@
-name: test-workflow.yml
-on: push
-
-jobs:
-  reusable-workflow:
-    uses: dotMatthew/github-actions-reusable-workflows/.github/workflows/example-workflow.yml@main
